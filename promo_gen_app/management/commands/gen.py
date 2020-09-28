@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 import secrets, string
 import json
-from _vars import *
+from vars import *
 
 
 def make_code(n: int) -> str:
