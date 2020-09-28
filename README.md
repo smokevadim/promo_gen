@@ -12,6 +12,7 @@ open terminal and run the following commands:
 ```shell script
 git clone https://github.com/smokevadim/promo_gen.git
 cd promo_gen
+virtualenv venv
 pip install -r requirements.txt
 ```
 
