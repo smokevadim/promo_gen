@@ -3,6 +3,7 @@ from io import StringIO
 from django.core.management import call_command
 import os
 import json
+import random
 
 
 def check_codes_len() -> tuple:
@@ -16,9 +17,17 @@ def check_codes_len() -> tuple:
     return l, len(dict_in_file)
 
 
+def get_random_code() -> str:
+    if os.path.isfile('data_file.json'):
+        with open('data_file.json', 'r', encoding='utf-8') as f:
+            dict_in_file = json.load(f)
+            random_code = random.choice(dict_in_file[random.choice(list(dict_in_file.keys()))])
+            return random_code
+
+
 class GeneratorTest(TestCase):
 
-    def test_generate_codes(self):
+    def test1_generate_codes(self):
         '''
         Create 58 promo codes and check this
         '''
@@ -40,3 +49,12 @@ class GeneratorTest(TestCase):
         self.assertIn('Codes generates successful', out.getvalue())
 
         self.assertEqual((58, 3), check_codes_len())
+
+    def test2_check_code(self):
+        '''
+        Check code in JSON
+        '''
+
+        out = StringIO()
+        call_command('chk', '-c={}'.format(get_random_code()), stdout=out)
+        self.assertIn('True', out.getvalue())

@@ -69,7 +69,3 @@ class Command(BaseCommand):
             required=True,
             help='Group of codes'
         )
-
-
-# if __name__ == '__main__':
-#     generate_codes(1, 'test')
