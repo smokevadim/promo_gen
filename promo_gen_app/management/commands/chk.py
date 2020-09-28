@@ -27,6 +27,6 @@ class Command(BaseCommand):
             '--code',
             action='store',
             type=str,
-            required=False,
+            required=True,
             help='Code to check'
         )
